@@ -29,6 +29,7 @@ public class RoomMain : MonoBehaviourPunCallbacks
         if (!PhotonNetwork.IsMasterClient)
         {
             player1Nickname.text = PhotonNetwork.MasterClient.NickName;
+            player2Nickname.text = PhotonNetwork.LocalPlayer.NickName;
         }
 
     }
