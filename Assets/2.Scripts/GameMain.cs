@@ -27,6 +27,7 @@ public class GameMain : MonoBehaviourPunCallbacks
     private void Awake()
     {
         Debug.Log($"[GameMain Awake]");
+        
         player1Nickname.text = PlayerDataManager.Instance.player1.NickName;
         player2Nickname.text = PlayerDataManager.Instance.player2.NickName;
     }
