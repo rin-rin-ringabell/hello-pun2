@@ -27,6 +27,7 @@ public class RoomMain : MonoBehaviourPunCallbacks
     }
     public override void OnJoinedRoom()
     {
+        //네가 방장
         Debug.Log("[RoomMain] OnJoinedRoom");        
         Debug.Log($"[RoomMain] {PhotonNetwork.CurrentRoom.Name}방에 입장했습니다.");
         Debug.Log($"{PhotonNetwork.LocalPlayer.NickName}가 방장인가? : {PhotonNetwork.IsMasterClient}");
@@ -35,13 +36,12 @@ public class RoomMain : MonoBehaviourPunCallbacks
         {
             player1Nickname.text = PhotonNetwork.MasterClient.NickName;
             player2Nickname.text = PhotonNetwork.LocalPlayer.NickName;
-            btnStart.gameObject.SetActive(true);
-            btnStart.interactable = false;
         }
     }
 
     public void Init()
     {
+        //내가 방장
         Debug.Log("[RoomMain Init]");
         Debug.Log($"[RoomMain] {PhotonNetwork.CurrentRoom.Name}방을 만들었습니다.");
         Debug.Log($"{PhotonNetwork.LocalPlayer.NickName}가 방장인가? : {PhotonNetwork.IsMasterClient}");
