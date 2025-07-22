@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Photon.Pun;
@@ -5,6 +6,7 @@ using Photon.Realtime;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+
 
 public class RoomMain : MonoBehaviourPunCallbacks
 {
@@ -24,29 +26,34 @@ public class RoomMain : MonoBehaviourPunCallbacks
     {
         Debug.Log($"[RoomyMain] 다른 플레이어가 룸에 입장 했습니다. : {newPlayer}");
         player2Nickname.text = newPlayer.NickName;
+        PlayerDataManager.Instance.SetPlayer2(newPlayer);
     }
     public override void OnJoinedRoom()
     {
         //네가 방장
         Debug.Log("[RoomMain] OnJoinedRoom");        
         Debug.Log($"[RoomMain] {PhotonNetwork.CurrentRoom.Name}방에 입장했습니다.");
-        Debug.Log($"{PhotonNetwork.LocalPlayer.NickName}가 방장인가? : {PhotonNetwork.IsMasterClient}");
+        Debug.Log($"{PhotonNetwork.LocalPlayer.NickName}(이)가 방장인가? : {PhotonNetwork.IsMasterClient}");
 
         if (!PhotonNetwork.IsMasterClient)
         {
             player1Nickname.text = PhotonNetwork.MasterClient.NickName;
             player2Nickname.text = PhotonNetwork.LocalPlayer.NickName;
+            PlayerDataManager.Instance.SetPlayer1(PhotonNetwork.MasterClient);
+            PlayerDataManager.Instance.SetPlayer2(PhotonNetwork.LocalPlayer);
         }
     }
-
+     
     public void Init()
     {
         //내가 방장
         Debug.Log("[RoomMain Init]");
         Debug.Log($"[RoomMain] {PhotonNetwork.CurrentRoom.Name}방을 만들었습니다.");
-        Debug.Log($"{PhotonNetwork.LocalPlayer.NickName}가 방장인가? : {PhotonNetwork.IsMasterClient}");
+        Debug.Log($"{PhotonNetwork.LocalPlayer.NickName}(이)가 방장인가? : {PhotonNetwork.IsMasterClient}");
         if (PhotonNetwork.IsMasterClient)
         {
+            PlayerDataManager.Instance.SetPlayer1(PhotonNetwork.LocalPlayer);
+
             player1Nickname.text = PhotonNetwork.LocalPlayer.NickName;
             btnStart.interactable = false;
             btnReady.gameObject.SetActive(false);
@@ -75,5 +82,4 @@ public class RoomMain : MonoBehaviourPunCallbacks
         btnStart.gameObject.SetActive(true);
         btnStart.interactable = true;
     }
-
 }
