@@ -34,6 +34,8 @@ public class RoomMain : MonoBehaviourPunCallbacks
         {
             player1Nickname.text = PhotonNetwork.MasterClient.NickName;
             player2Nickname.text = PhotonNetwork.LocalPlayer.NickName;
+            btnReady.gameObject.SetActive(false);
+            btnReady.interactable = false;
         }
     }
 
@@ -45,6 +47,8 @@ public class RoomMain : MonoBehaviourPunCallbacks
         if (PhotonNetwork.IsMasterClient)
         {
             player1Nickname.text = PhotonNetwork.LocalPlayer.NickName;
+            btnStart.gameObject.SetActive(true);
+            btnStart.interactable = false;
         }
     }
 
@@ -58,7 +62,7 @@ public class RoomMain : MonoBehaviourPunCallbacks
         });
         btnStart.onClick.AddListener(() =>
         {
-
+            PhotonNetwork.LoadLevel("GameScene");
         });
     }
 
@@ -66,6 +70,7 @@ public class RoomMain : MonoBehaviourPunCallbacks
     public void RPC_OnClickReadyButton(PhotonMessageInfo info)
     {
         Debug.Log($"[RPC_OnClickReadyButton] sender : {info.Sender.NickName}");
+        btnStart.interactable = true;
     }
 
 }
