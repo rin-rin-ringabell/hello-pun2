@@ -4,11 +4,15 @@ using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RoomMain : MonoBehaviourPunCallbacks
 {
     public TMP_Text player1Nickname;
     public TMP_Text player2Nickname;
+
+    public Button btnReady;
+    public Button btnStart;
 
     private void Awake()
     {
@@ -31,12 +35,12 @@ public class RoomMain : MonoBehaviourPunCallbacks
             player1Nickname.text = PhotonNetwork.MasterClient.NickName;
             player2Nickname.text = PhotonNetwork.LocalPlayer.NickName;
         }
-
     }
 
     public void Init()
     {
         Debug.Log("[RoomMain Init]");
+        Debug.Log($"[RoomMain] {PhotonNetwork.CurrentRoom.Name}방을 만들었습니다.");
         Debug.Log($"{PhotonNetwork.LocalPlayer.NickName}가 방장인가? : {PhotonNetwork.IsMasterClient}");
         if (PhotonNetwork.IsMasterClient)
         {
@@ -47,6 +51,21 @@ public class RoomMain : MonoBehaviourPunCallbacks
     void Start()
     {
         Debug.Log("[RoomMain Start]");
+        btnReady.onClick.AddListener(() =>
+        {
+            btnReady.interactable = false;
+            GetComponent<PhotonView>().RPC("RPC_OnClickReadyButton", RpcTarget.MasterClient);
+        });
+        btnStart.onClick.AddListener(() =>
+        {
+
+        });
+    }
+
+    [PunRPC]
+    public void RPC_OnClickReadyButton(PhotonMessageInfo info)
+    {
+        Debug.Log($"[RPC_OnClickReadyButton] sender : {info.Sender.NickName}");
     }
 
 }
