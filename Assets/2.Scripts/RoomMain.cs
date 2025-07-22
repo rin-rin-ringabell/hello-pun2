@@ -72,6 +72,7 @@ public class RoomMain : MonoBehaviourPunCallbacks
     public void RPC_OnClickReadyButton(PhotonMessageInfo info)
     {
         Debug.Log($"[RPC_OnClickReadyButton] sender : {info.Sender.NickName}");
+        btnStart.gameObject.SetActive(true);
         btnStart.interactable = true;
     }
 
