@@ -76,4 +76,14 @@ public class LobbyMain : MonoBehaviourPunCallbacks
     {
         Debug.Log($"[LobbyMain] OnRoomListUpdate : {roomList.Count}");
     }
+
+    public override void OnPlayerEnteredRoom(Player newPlayer)
+    {
+        Debug.Log("[LobbyMain OnPlayerEnteredRoom]");
+    }
+
+    public override void OnJoinRandomFailed(short returnCode, string message)
+    {
+        Debug.Log($"[LobbyMain OnJoinRandomFailed]{returnCode}, {message}");
+    }
 }
