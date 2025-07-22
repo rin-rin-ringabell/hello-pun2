@@ -1097,7 +1097,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roomNameInputField: {fileID: 291665573}
   btnCreateRoom: {fileID: 2102379566}
-  btnQuickJoinRoom: {fileID: 0}
+  btnQuickJoinRoom: {fileID: 1939390144}
 --- !u!4 &1093591472
 Transform:
   m_ObjectHideFlags: 0

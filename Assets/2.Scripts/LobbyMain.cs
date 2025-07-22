@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Photon.Pun;
@@ -12,7 +13,6 @@ public class LobbyMain : MonoBehaviourPunCallbacks
     public TMP_InputField roomNameInputField;
     public Button btnCreateRoom;
     public Button btnQuickJoinRoom;
-
     private void Awake()
     {
         Debug.Log("[LobbyMain] Awake");
@@ -40,10 +40,11 @@ public class LobbyMain : MonoBehaviourPunCallbacks
                 PhotonNetwork.CreateRoom(roomName, options);
             }
         });
-    }
-    public override void OnRoomListUpdate(List<RoomInfo> roomList)
-    {
 
+        btnQuickJoinRoom.onClick.AddListener(() =>
+        {
+
+        });
     }
 
     public override void OnCreateRoomFailed(short returnCode, string message)
@@ -54,10 +55,25 @@ public class LobbyMain : MonoBehaviourPunCallbacks
     public override void OnCreatedRoom()
     {
         Debug.Log("[LobbyMain] 룸이 생성 되었습니다.");
+    }
+
+    public override void OnJoinRoomFailed(short returnCode, string message)
+    {
+        Debug.Log($"[LobbyMain] 룸 입장에 실패!!! : {returnCode}, {message}");
+    }
+
+    public override void OnJoinedRoom()
+    {
+        Debug.Log($"[LobbyMain] 룸에 입장했습니다.");
         var asyncOperation = SceneManager.LoadSceneAsync("RoomScene");
         asyncOperation.completed += operation =>
         {
             GameObject.FindObjectOfType<RoomMain>().Init();
         };
+    }
+
+    public override void OnRoomListUpdate(List<RoomInfo> roomList)
+    {
+        Debug.Log($"[LobbyMain] OnRoomListUpdate : {roomList.Count}");
     }
 }
