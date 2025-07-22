@@ -43,7 +43,7 @@ public class LobbyMain : MonoBehaviourPunCallbacks
 
         btnQuickJoinRoom.onClick.AddListener(() =>
         {
-
+            PhotonNetwork.JoinRandomRoom();
         });
     }
 
@@ -79,11 +79,11 @@ public class LobbyMain : MonoBehaviourPunCallbacks
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
-        Debug.Log("[LobbyMain OnPlayerEnteredRoom]");
+        Debug.Log($"[LobbyMain] 플레이어가 룸에 입장 했습니다. : {newPlayer}");
     }
 
     public override void OnJoinRandomFailed(short returnCode, string message)
     {
-        Debug.Log($"[LobbyMain OnJoinRandomFailed]{returnCode}, {message}");
+        Debug.Log($"[LobbyMain] 빠른 입장에 실패 했습니다.  : {returnCode}, {message}");
     }
 }
