@@ -30,6 +30,7 @@ public class RoomMain : MonoBehaviourPunCallbacks
         {
             player1Nickname.text = PhotonNetwork.MasterClient.NickName;
         }
+
     }
 
     public void Init()
