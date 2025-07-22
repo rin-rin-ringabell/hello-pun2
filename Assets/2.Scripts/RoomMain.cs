@@ -34,8 +34,8 @@ public class RoomMain : MonoBehaviourPunCallbacks
         {
             player1Nickname.text = PhotonNetwork.MasterClient.NickName;
             player2Nickname.text = PhotonNetwork.LocalPlayer.NickName;
-            btnReady.gameObject.SetActive(false);
-            btnReady.interactable = false;
+            btnStart.gameObject.SetActive(true);
+            btnStart.interactable = false;
         }
     }
 
@@ -49,6 +49,8 @@ public class RoomMain : MonoBehaviourPunCallbacks
             player1Nickname.text = PhotonNetwork.LocalPlayer.NickName;
             btnStart.gameObject.SetActive(true);
             btnStart.interactable = false;
+            btnReady.gameObject.SetActive(false);
+            btnReady.interactable = false;
         }
     }
 
