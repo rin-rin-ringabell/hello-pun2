@@ -17,7 +17,8 @@ public class RoomMain : MonoBehaviourPunCallbacks
     private void Awake()
     {
         Debug.Log("[RoomMain Awake]");
-        
+        btnStart.gameObject.SetActive(false);
+
     }
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
@@ -47,7 +48,6 @@ public class RoomMain : MonoBehaviourPunCallbacks
         if (PhotonNetwork.IsMasterClient)
         {
             player1Nickname.text = PhotonNetwork.LocalPlayer.NickName;
-            btnStart.gameObject.SetActive(false);
             btnStart.interactable = false;
             btnReady.gameObject.SetActive(false);
             btnReady.interactable = false;
