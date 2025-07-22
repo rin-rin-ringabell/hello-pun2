@@ -47,7 +47,7 @@ public class RoomMain : MonoBehaviourPunCallbacks
         if (PhotonNetwork.IsMasterClient)
         {
             player1Nickname.text = PhotonNetwork.LocalPlayer.NickName;
-            btnStart.gameObject.SetActive(true);
+            btnStart.gameObject.SetActive(false);
             btnStart.interactable = false;
             btnReady.gameObject.SetActive(false);
             btnReady.interactable = false;
